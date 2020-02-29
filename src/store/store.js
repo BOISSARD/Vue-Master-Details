@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import PersonnesStore from './modules/personnes/PersonnesStore'
+
 Vue.use(Vuex)
 
-export const store = new Vuex.Store({
-    state: {
-        persons: [],
-        
+export default new Vuex.Store({
+    modules: {
+        'personnes': PersonnesStore
     }
 })

@@ -2,10 +2,10 @@
   <div id="app" class="container-fluid">
     <div class="row">
       <div class="col-md-auto">
-        <master/>
+        <Master/>
       </div>
       <div class="col">
-        <detail/>
+        <Detail/>
       </div>
     </div>
   </div>
@@ -21,8 +21,8 @@ import "bootstrap/dist/css/bootstrap.css";
 export default {
   name: "app",
   components: {
-    "master": Master,
-    "detail": Detail,
+    Master,
+    Detail,
   }
 };
 </script>  
