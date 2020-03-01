@@ -11,7 +11,12 @@
                         placeholder="Surnom"
                         v-model="surnom"
                     />
-                    <Message v-if="errors.surnom.afficher" fermable class="col-sm-12 message-perso" type="danger">{{ errors.surnom.motif }}</Message>
+                    <Message
+                        v-if="errors.surnom.afficher"
+                        fermable
+                        class="col-sm-12 message-perso"
+                        type="danger"
+                    >{{ errors.surnom.motif }}</Message>
                 </div>
             </div>
             <div class="form-group row">
@@ -24,7 +29,12 @@
                         placeholder="Prénom"
                         v-model="prenom"
                     />
-                <Message v-if="errors.prenom.afficher" fermable class="col-sm-12 message-perso" type="danger">{{ errors.prenom.motif }}</Message>
+                    <Message
+                        v-if="errors.prenom.afficher"
+                        fermable
+                        class="col-sm-12 message-perso"
+                        type="danger"
+                    >{{ errors.prenom.motif }}</Message>
                 </div>
             </div>
             <div class="form-group row">
@@ -37,7 +47,12 @@
                         placeholder="Nom"
                         v-model="nom"
                     />
-                <Message v-if="errors.nom.afficher" fermable class="col-sm-12 message-perso" type="danger">{{ errors.nom.motif }}</Message>
+                    <Message
+                        v-if="errors.nom.afficher"
+                        fermable
+                        class="col-sm-12 message-perso"
+                        type="danger"
+                    >{{ errors.nom.motif }}</Message>
                 </div>
             </div>
             <div class="form-group row">
@@ -50,7 +65,12 @@
                         placeholder="Date naissance"
                         v-model="ddn"
                     />
-                    <Message v-if="errors.ddn.afficher" fermable class="col-sm-12 message-perso" type="danger">{{ errors.ddn.motif }}</Message>
+                    <Message
+                        v-if="errors.ddn.afficher"
+                        fermable
+                        class="col-sm-12 message-perso"
+                        type="danger"
+                    >{{ errors.ddn.motif }}</Message>
                 </div>
             </div>
             <div class="form-group row d-flex justify-content-around">
@@ -81,7 +101,7 @@
 <script>
 import Vuex from "vuex";
 
-import Message from './Message';
+import Message from "./Message";
 
 export default {
     name: "Detail",
@@ -126,7 +146,7 @@ export default {
         activerModification() {
             return this.getId !== null;
         },
-        activerAjout(){
+        activerAjout() {
             return this.getId === null;
         }
     },
@@ -170,27 +190,31 @@ export default {
                 this.design.bouton.supprimer.push("btn-secondary");
             }
         },
-        validation(){
+        validation() {
             let surnomOk = true;
             let prenomOk = true;
             let nomOk = true;
             let ddnOk = true;
-            
+
             surnomOk &= this.surnom !== null && this.surnom !== undefined;
-            if(!surnomOk) this.errors.surnom = {afficher: true, motif: "Le surnom ne peut être vide"}
-            else this.errors.surnom.afficher = false;
+            if (!surnomOk) this.errors.surnom = { afficher: true, motif: "Le surnom ne peut être vide." };
+            if (surnomOk) this.errors.surnom.afficher = false;
 
             prenomOk &= this.prenom !== null && this.prenom !== undefined;
-            if(!prenomOk) this.errors.prenom = {afficher: true, motif: "Le prénom ne peut être vide"}
-            else this.errors.prenom.afficher = false;
-            
+            if (!prenomOk) this.errors.prenom = { afficher: true, motif: "Le prénom ne peut être vide." };
+            if (prenomOk) this.errors.prenom.afficher = false;
+
             nomOk &= this.nom !== null && this.nom !== undefined;
-            if(!nomOk) this.errors.nom = {afficher: true, motif: "Le nom ne peut être vide"}
-            else this.errors.nom.afficher = false;
-            
-            ddnOk &= this.ddn !== null && this.ddn !== undefined;
-            if(!ddnOk) this.errors.ddn = {afficher: true, motif: "La date de naissance ne peut être vide"}
-            else this.errors.ddn.afficher = false;
+            if (!nomOk) this.errors.nom = { afficher: true, motif: "Le nom ne peut être vide." };
+            if (nomOk) this.errors.nom.afficher = false;
+
+            ddnOk &= this.ddn !== null && this.ddn !== undefined && this.ddn !== "";
+            if (!ddnOk) this.errors.ddn = { afficher: true, motif: "La date de naissance ne peut être vide." };
+            else {
+                ddnOk &= (Date.now() - new Date(this.ddn)) > 0;
+                if (!ddnOk) this.errors.ddn = { afficher: true, motif: "La date de naissance n'est pas valide. La personne n'est pas encore née." }; // ["La date de naissance n'est pas validebundleRenderer.", "La personne n'est pas encore née."]
+            }
+            if (ddnOk) this.errors.ddn.afficher = false;
 
             return surnomOk && prenomOk && nomOk && ddnOk;
         },
@@ -200,21 +224,21 @@ export default {
                 surnom: this.surnom,
                 nom: this.nom,
                 prenom: this.prenom,
-                dateNaissance: new Date(this.ddn),
+                dateNaissance: new Date(this.ddn)
             });
         },
         modifierPersonne() {
-            if (!this.activerModification) return;
+            if (!this.activerModification || !this.validation()) return;
             this.modifier_personne({
                 index: this.getId,
                 surnom: this.surnom,
                 nom: this.nom,
                 prenom: this.prenom,
-                dateNaissance: new Date(this.ddn),
+                dateNaissance: new Date(this.ddn)
             });
         },
         supprimerPersonne() {
-            if (!this.activerModification) return;
+            if (!this.activerModification || !this.validation()) return;
             this.supprimer_personne(this.getId);
         }
     },
@@ -224,7 +248,8 @@ export default {
 };
 </script>  
 
-<style> /* scoped */
+<style>
+/* scoped */
 #detail-part {
     padding: 20px 20px 0px 20px;
     border: 1px solid rgba(0, 0, 0, 0.125);

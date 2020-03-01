@@ -1,7 +1,7 @@
 <template>
     <button type="button" :class="design.bouton" @click="clickEvent">
         {{ personne.surnom }}
-        <span :class="design.badge">{{ agePersonne }}</span>
+        <span :class="design.badge">{{ agePersonne }} ans</span>
     </button>
 </template>
 
@@ -28,7 +28,7 @@ export default {
     computed: {
         ...Vuex.mapGetters('personnes', ['getSelectedId']),
         agePersonne(){
-            return Math.abs(new Date(Date. now() - this.personne.dateNaissance.getTime()).getUTCFullYear() - 1970);
+            return Math.abs(new Date(Date.now() - this.personne.dateNaissance.getTime()).getUTCFullYear() - 1970);
         }
     },
     watch: {

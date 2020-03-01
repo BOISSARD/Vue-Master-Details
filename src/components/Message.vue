@@ -1,6 +1,6 @@
 <template>
     <div class="alert" :class="classes" role="alert">
-        <slot></slot>
+        <slot v-html="contenuHtml"></slot>
         <button v-if="fermable" type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -12,7 +12,7 @@ export default {
     name: 'Message',
     data(){
         return {
-
+            contenuHtml: "Lol"
         }
     },
     props: {

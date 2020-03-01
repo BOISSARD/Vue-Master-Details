@@ -31,7 +31,6 @@ export default {
   watch: {
       getListePersonnes: {
           handler: function(newListe) {
-              console.log(newListe);
               this.listePeronnes = newListe.slice();
           },
           deep: true
