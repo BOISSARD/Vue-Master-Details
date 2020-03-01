@@ -40,6 +40,7 @@ export default {
         },
         supprimer_personne({commit}, index) {
             commit("SUPPRIMER_PERSONNE", index);
+            commit("DESELECT_ID");
         },
         select_id({commit}, index) {
             commit("SELECT_ID", index);
