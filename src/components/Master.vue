@@ -15,6 +15,11 @@ import MasterItem from './MasterItem';
 
 export default {
   name: "Master",
+  data() {
+      return {
+          listePeronnes: []
+      }
+  },
   components: {
     MasterItem
   },
@@ -23,11 +28,11 @@ export default {
           getListePersonnes: 'getListe'
       })
   },
-
   watch: {
       getListePersonnes: {
           handler: function(newListe) {
               console.log(newListe);
+              this.listePeronnes = newListe.slice();
           },
           deep: true
       }

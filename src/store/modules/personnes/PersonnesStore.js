@@ -17,7 +17,7 @@ export default {
         },
         MODIFIER_PERSONNE(state, {index, nom, prenom, surnom, dateNaissance}){
             if(typeof state.liste[index] === 'undefined') return;
-            state.liste[index] = new Personne(nom, prenom, surnom, dateNaissance);
+            state.liste.splice(index, 1, new Personne(nom, prenom, surnom, dateNaissance));
         },
         SUPPRIMER_PERSONNE(state, index){
             if(typeof state.liste[index] === 'undefined') return;
