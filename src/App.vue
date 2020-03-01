@@ -15,8 +15,7 @@
 import Master from "./components/Master.vue";
 import Detail from "./components/Detail.vue";
 
-import "bootstrap/dist/css/bootstrap.css";
-//import "bootstrap/js/dist/*.js";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default {
   name: "app",

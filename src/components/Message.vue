@@ -1,7 +1,7 @@
 <template>
-    <div class="alert" :class="classes" role="alert">
+    <div class="alert" :class="classes">
         <slot v-html="contenuHtml"></slot>
-        <button v-if="fermable" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <button v-if="fermable" type="button" class="close" aria-label="Close" @click="closeAlert">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -33,8 +33,10 @@ export default {
             return classes
         }
     },
-    watch: {
-        
+    methods: {
+        closeAlert(){
+            this.$emit("close");
+        }
     },
 }
 </script>

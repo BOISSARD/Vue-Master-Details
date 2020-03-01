@@ -16,6 +16,7 @@
                         fermable
                         class="col-sm-12 message-perso"
                         type="danger"
+                        @close="errors.surnom.afficher = false"
                     >{{ errors.surnom.motif }}</Message>
                 </div>
             </div>
@@ -34,6 +35,7 @@
                         fermable
                         class="col-sm-12 message-perso"
                         type="danger"
+                        @close="errors.prenom.afficher = false"
                     >{{ errors.prenom.motif }}</Message>
                 </div>
             </div>
@@ -52,6 +54,7 @@
                         fermable
                         class="col-sm-12 message-perso"
                         type="danger"
+                        @close="errors.nom.afficher = false"
                     >{{ errors.nom.motif }}</Message>
                 </div>
             </div>
@@ -70,6 +73,7 @@
                         fermable
                         class="col-sm-12 message-perso"
                         type="danger"
+                        @close="errors.ddn.afficher = false"
                     >{{ errors.ddn.motif }}</Message>
                 </div>
             </div>
